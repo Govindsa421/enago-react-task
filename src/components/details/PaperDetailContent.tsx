@@ -12,8 +12,7 @@ interface Paper {
   publishername: string;
   published_at: string;
   journalaltimpactfactor: string;
-  //   doi?: string;
-  journalname?: string;
+  journaldetails?: string;
   articlelink?: string;
 }
 
@@ -35,7 +34,6 @@ export default function PaperDetailContent({ paper }: PaperDetailContentProps) {
         overflow: "hidden",
       }}
     >
-      {/* Main Layout: Image Left, Content Right */}
       <div
         style={{
           display: "flex",
@@ -43,7 +41,6 @@ export default function PaperDetailContent({ paper }: PaperDetailContentProps) {
           alignItems: "flex-start",
         }}
       >
-        {/* Left Side - Book Image and Impact Factor */}
         <div
           style={{
             display: "flex",
@@ -75,27 +72,22 @@ export default function PaperDetailContent({ paper }: PaperDetailContentProps) {
             />
           </div>
 
-          {/* Impact Factor Badge */}
           <ImpactFactorBadge impactFactor={paper.journalaltimpactfactor} />
         </div>
 
-        {/* Right Side - Paper Information */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Title */}
           <h1
             style={{
-              fontSize: "2rem",
+              fontSize: "1.5rem",
               fontWeight: "700",
               color: "#1e293b",
               lineHeight: "1.2",
               marginBottom: "1.5rem",
-              wordWrap: "break-word",
             }}
           >
             {paper.papertitle}
           </h1>
 
-          {/* Key Information Grid */}
           <div
             style={{
               display: "grid",
@@ -147,11 +139,12 @@ export default function PaperDetailContent({ paper }: PaperDetailContentProps) {
                   fontSize: "0.875rem",
                 }}
               >
-                {paper.publishername}
+                {paper.publishername} (
+                {moment(paper.published_at).format("YYYY")})
               </span>
             </div>
 
-            {paper.journalname && (
+            {paper.journaldetails && (
               <div
                 style={{
                   display: "flex",
@@ -176,45 +169,16 @@ export default function PaperDetailContent({ paper }: PaperDetailContentProps) {
                     fontSize: "0.875rem",
                   }}
                 >
-                  {paper.journalname}
+                  {paper.journaldetails}
                 </span>
               </div>
             )}
-
-            <div
-              style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}
-            >
-              <strong
-                style={{
-                  minWidth: "120px",
-                  color: "#475569",
-                  fontSize: "0.875rem",
-                  fontWeight: "600",
-                }}
-              >
-                Published:
-              </strong>
-              <span
-                style={{
-                  color: "#64748b",
-                  lineHeight: "1.5",
-                  fontSize: "0.875rem",
-                }}
-              >
-                {moment(paper.published_at).format("MMMM DD, YYYY")}
-              </span>
-            </div>
-
-            {/* DOI Link Component */}
-            {/* <DOILink doi={paper.doi} /> */}
           </div>
 
-          {/* Article Link Button */}
           <ArticleLinkButton articleLink={paper.articlelink} />
         </div>
       </div>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 768px) {
           div:first-child {

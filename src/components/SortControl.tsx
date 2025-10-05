@@ -1,13 +1,19 @@
 "use client";
 import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+import { Paper } from "@/types/paper";
+
+interface SortConfig {
+  field: keyof Paper;
+  order: "asc" | "desc";
+}
 
 interface SortControlsProps {
-  sort: { field: string; order: "asc" | "desc" };
-  onChange: (sort: { field: string; order: "asc" | "desc" }) => void;
+  sort: SortConfig;
+  onChange: (sort: SortConfig) => void;
 }
 
 export default function SortControls({ sort, onChange }: SortControlsProps) {
-  const handleSort = (field: string) => {
+  const handleSort = (field: keyof Paper) => {
     if (sort.field === field) {
       onChange({ field, order: sort.order === "asc" ? "desc" : "asc" });
     } else {
@@ -15,7 +21,7 @@ export default function SortControls({ sort, onChange }: SortControlsProps) {
     }
   };
 
-  const getSortIcon = (field: string) => {
+  const getSortIcon = (field: keyof Paper) => {
     if (sort.field !== field) return <FaSort />;
     return sort.order === "asc" ? <FaSortUp /> : <FaSortDown />;
   };

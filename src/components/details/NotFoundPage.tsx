@@ -17,7 +17,6 @@ export default function NotFoundPage() {
           maxWidth: "500px",
         }}
       >
-        <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>📄</div>
         <h2 style={{ marginBottom: "0.5rem", color: "#1e293b" }}>
           Paper Not Found
         </h2>
@@ -27,7 +26,6 @@ export default function NotFoundPage() {
         <Link href="/">
           <button
             style={{
-              background: "linear-gradient(135deg, #3b82f6, #1d4ed8)",
               border: "none",
               padding: "0.75rem 1rem",
               borderRadius: "8px",
@@ -36,20 +34,9 @@ export default function NotFoundPage() {
               fontWeight: "600",
               fontSize: "0.875rem",
               transition: "all 0.3s ease",
-              boxShadow: "0 2px 4px rgba(59, 130, 246, 0.2)",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "translateY(-1px)";
-              e.currentTarget.style.boxShadow =
-                "0 4px 8px rgba(59, 130, 246, 0.3)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 2px 4px rgba(59, 130, 246, 0.2)";
             }}
           >
-            ← Back to Home
+            Back to Home
           </button>
         </Link>
       </div>

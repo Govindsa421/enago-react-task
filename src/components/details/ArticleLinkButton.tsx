@@ -26,20 +26,11 @@ export default function ArticleLinkButton({
           textDecoration: "none",
           fontSize: "0.875rem",
           fontWeight: "600",
-          boxShadow: "0 4px 6px rgba(59, 130, 246, 0.2)",
+
           transition: "all 0.3s ease",
         }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.transform = "translateY(-2px)";
-          e.currentTarget.style.boxShadow =
-            "0 6px 12px rgba(59, 130, 246, 0.3)";
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "0 4px 6px rgba(59, 130, 246, 0.2)";
-        }}
       >
-        📖 Read Full Article
+        Read Full Article
       </a>
     </div>
   );

@@ -5,21 +5,17 @@ import Link from "next/link";
 import moment from "moment";
 import styles from "./card.module.scss";
 import AuthorBookImage from "../../../public/img/Author_Author_Cover.jpg";
+import { Paper } from "@/types/paper";
+import { FC } from "react";
 
-interface Paper {
-  id: string;
-  papertitle: string;
-  coauthors: string;
-  publishername: string;
-  published_at: string;
-  journalaltimpactfactor: string;
-  doi?: string;
-  journalname?: string;
+// Define component props interface
+interface CardProps {
+  paper: Paper;
 }
 
-export default function Card({ paper }: { paper: Paper }) {
-  const formatImpactFactor = (value: string) => {
-    const num = parseFloat(value);
+const Card: FC<CardProps> = ({ paper }) => {
+  const formatImpactFactor = (value: string): string => {
+    const num: number = parseFloat(value);
     if (isNaN(num) || num === 0) return "-";
     return num.toFixed(2);
   };
@@ -27,7 +23,6 @@ export default function Card({ paper }: { paper: Paper }) {
   return (
     <article className={styles.cardContainer}>
       <div className={styles.card}>
-        {/* Book Cover and Impact Factor Section */}
         <div>
           <div className={styles.thumb}>
             <Image
@@ -53,7 +48,6 @@ export default function Card({ paper }: { paper: Paper }) {
           </div>
         </div>
 
-        {/* Paper Information Section */}
         <div className={styles.info}>
           <div className={styles.detailRow}>
             <strong>Paper Title:</strong>
@@ -65,7 +59,7 @@ export default function Card({ paper }: { paper: Paper }) {
           <div className={styles.detailRow}>
             <strong>Authors:</strong>
             <span className={styles.textTruncated} title={paper.coauthors}>
-              {paper.coauthors}
+              {paper.coauthors || "N/A"}
             </span>
           </div>
 
@@ -86,11 +80,6 @@ export default function Card({ paper }: { paper: Paper }) {
             </div>
           )}
 
-          <div className={styles.detailRow}>
-            <strong>Published:</strong>
-            <span>{moment(paper.published_at).format("MMM DD, YYYY")}</span>
-          </div>
-
           <div className={styles.actions}>
             <Link href={`/details/${paper.id}`}>
               <button className={styles.detailsBtn} type="button">
@@ -102,4 +91,6 @@ export default function Card({ paper }: { paper: Paper }) {
       </div>
     </article>
   );
-}
+};
+
+export default Card;

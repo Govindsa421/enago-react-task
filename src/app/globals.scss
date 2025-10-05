@@ -51,16 +51,14 @@ a {
   }
 }
 
-// Container and layout styles
 .container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: $spacing-lg;
+
   width: 100%;
   box-sizing: border-box;
 
   @include desktop-up {
-    max-width: 1200px;
+    // max-width: 1200px;
   }
 
   @include tablet-up {
@@ -72,7 +70,6 @@ a {
   }
 }
 
-// Common component styles
 .searchSection {
   margin-bottom: $spacing-xl;
   @include flex-center;
@@ -95,11 +92,28 @@ a {
 }
 
 .sortButton {
-  @include button-secondary;
+  @include button-primary;
   gap: $spacing-xs;
+  background: $color-secondary;
+  color: $color-foreground;
+  border: 1px solid $color-border;
+  transition: $transition-base;
+
+  &:hover {
+    background: $color-muted;
+    transform: translateY(-1px);
+  }
 
   &.active {
-    @include button-primary;
+    background: $color-primary;
+    color: $color-primary-foreground;
+    border-color: $color-primary;
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+
+    &:hover {
+      background: #1e4a7a;
+    }
   }
 
   @include mobile-only {
@@ -118,13 +132,32 @@ a {
 }
 
 .paginationButton {
-  @include button-secondary;
+  @include button-primary;
   min-width: 40px;
   height: 40px;
   @include flex-center;
+  background: $color-secondary;
+  color: $color-foreground;
+  border: 1px solid $color-border;
+  transition: $transition-base;
+
+  &:hover:not(:disabled) {
+    background: $color-muted;
+    color: $color-foreground;
+    transform: translateY(-1px);
+  }
 
   &.active {
-    @include button-primary;
+    background: $color-primary;
+    color: $color-primary-foreground;
+    border-color: $color-primary;
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+
+    &:hover {
+      background: #1e4a7a;
+      color: $color-primary-foreground;
+    }
   }
 
   &:disabled {
@@ -133,10 +166,13 @@ a {
     background: $color-muted;
     border-color: $color-border;
     transform: none;
+
+    &:hover {
+      transform: none;
+    }
   }
 }
 
-// Loading and error states
 .loadingState {
   display: flex;
   justify-content: center;
@@ -159,7 +195,6 @@ a {
   margin: $spacing-lg 0;
 }
 
-// Skeleton loading styles
 .skeleton {
   pointer-events: none;
   user-select: none;

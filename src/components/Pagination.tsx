@@ -57,7 +57,7 @@ export default function Pagination({
         disabled={page === 1}
         className="paginationButton"
       >
-        ← Previous
+        Previous
       </button>
 
       {visiblePages.map((pageNum, idx) => {
@@ -93,7 +93,7 @@ export default function Pagination({
         disabled={page === totalPages}
         className="paginationButton"
       >
-        Next →
+        Next
       </button>
     </div>
   );

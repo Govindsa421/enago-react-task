@@ -6,9 +6,10 @@ import PaperDetailContent from "@/components/details/PaperDetailContent";
 export default async function PaperDetails({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const paper = await getPaper(params.id);
+  const { id } = await params;
+  const paper = await getPaper(id);
 
   if (!paper) {
     return <NotFoundPage />;

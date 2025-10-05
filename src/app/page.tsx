@@ -6,7 +6,7 @@ import styles from "@/components/card/card.module.scss";
 import SearchBar from "@/components/SearchBar";
 import SortControls from "@/components/SortControl";
 import Pagination from "@/components/Pagination";
-import HomeSkeleton from "@/components/HomeSkeleton";
+import HomeSkeleton from "@/components/skeleton/HomeSkeleton";
 
 export default function Home() {
   const {
@@ -49,25 +49,12 @@ export default function Home() {
           style={{
             fontSize: "2.5rem",
             fontWeight: "bold",
-            // background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
-            WebkitBackgroundClip: "text",
-            // WebkitTextFillColor: "transparent",
+
             marginBottom: "0.5rem",
           }}
         >
-          Research Papers Hub
+          Research Papers
         </h1>
-        <p
-          style={{
-            fontSize: "1.1rem",
-            color: "#64748b",
-            maxWidth: "600px",
-            margin: "0 auto",
-          }}
-        >
-          Discover and explore cutting-edge research papers from leading
-          journals and publications
-        </p>
       </header>
 
       <SearchBar value={search} onChange={setSearch} />
@@ -90,20 +77,6 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <div
-            style={{
-              marginBottom: "1.5rem",
-              padding: "1rem",
-              background: "#f8fafc",
-              borderRadius: "8px",
-              border: "1px solid #e2e8f0",
-              textAlign: "center",
-              color: "#64748b",
-            }}
-          >
-            Showing {papers.length} of {total} research papers
-          </div>
-
           <div className={styles.cardsGrid}>
             {papers.map((p) => (
               <Card key={p.id} paper={p} />

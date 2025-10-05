@@ -13,10 +13,6 @@ export default function SortSkeleton() {
         className="sortButton skeleton skeletonElement"
         style={{ width: "100px", height: "40px" }}
       ></div>
-      <div
-        className="sortButton skeleton skeletonElement"
-        style={{ width: "130px", height: "40px" }}
-      ></div>
     </div>
   );
 }

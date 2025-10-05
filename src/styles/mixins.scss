@@ -47,11 +47,12 @@
 
 @mixin button-primary {
   @include button-base;
-  background: $color-primary;
-  color: $color-primary-foreground;
+  background: $color-card;
+  color: $color-foreground;
 
   &:hover:not(:disabled) {
-    background: $color-primary-hover;
+    background: $color-primary;
+    color: $color-secondary;
   }
 }
 
