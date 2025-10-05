@@ -1,95 +1,123 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import Card from "@/components/card/Card";
+import { usePapers } from "@/hooks/usePapar";
+import styles from "@/components/card/card.module.scss";
+import SearchBar from "@/components/SearchBar";
+import SortControls from "@/components/SortControl";
+import Pagination from "@/components/Pagination";
+import HomeSkeleton from "@/components/HomeSkeleton";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const {
+    papers,
+    loading,
+    error,
+    search,
+    setSearch,
+    sort,
+    setSort,
+    page,
+    setPage,
+    total,
+    perPage,
+  } = usePapers();
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  console.log(papers, "papers");
+
+  if (loading) {
+    return <HomeSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <div className="container">
+        <div className="errorState">
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>⚠️</div>
+            <div>Error loading papers: {error}</div>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </div>
+    );
+  }
+
+  return (
+    <div className="container">
+      <header style={{ marginBottom: "2rem", textAlign: "center" }}>
+        <h1
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            // background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+            WebkitBackgroundClip: "text",
+            // WebkitTextFillColor: "transparent",
+            marginBottom: "0.5rem",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Research Papers Hub
+        </h1>
+        <p
+          style={{
+            fontSize: "1.1rem",
+            color: "#64748b",
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Discover and explore cutting-edge research papers from leading
+          journals and publications
+        </p>
+      </header>
+
+      <SearchBar value={search} onChange={setSearch} />
+      <SortControls sort={sort} onChange={setSort} />
+
+      {papers.length === 0 ? (
+        <div
+          style={{
+            textAlign: "center",
+            padding: "3rem",
+            color: "#64748b",
+            background: "#f8fafc",
+            borderRadius: "12px",
+            border: "1px solid #e2e8f0",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔍</div>
+          <h3 style={{ marginBottom: "0.5rem" }}>No papers found</h3>
+          <p>Try adjusting your search terms or filters</p>
+        </div>
+      ) : (
+        <>
+          <div
+            style={{
+              marginBottom: "1.5rem",
+              padding: "1rem",
+              background: "#f8fafc",
+              borderRadius: "8px",
+              border: "1px solid #e2e8f0",
+              textAlign: "center",
+              color: "#64748b",
+            }}
+          >
+            Showing {papers.length} of {total} research papers
+          </div>
+
+          <div className={styles.cardsGrid}>
+            {papers.map((p) => (
+              <Card key={p.id} paper={p} />
+            ))}
+          </div>
+
+          <Pagination
+            page={page}
+            perPage={perPage}
+            total={total}
+            onChange={setPage}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </>
+      )}
     </div>
   );
 }

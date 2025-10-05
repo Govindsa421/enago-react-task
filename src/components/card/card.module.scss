@@ -1,0 +1,176 @@
+@use "../../styles/variables" as *;
+
+.cardsGrid {
+  display: grid;
+  gap: 1.5rem;
+  // grid-template-columns: repeat(1, 1fr); // default: 1 card per row
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); // tablet: 2 per row
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr); // desktop: 3 per row
+  }
+}
+
+.card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  .thumb {
+    flex-shrink: 0;
+
+    // Mobile responsive
+    @media (max-width: 640px) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .thumb {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .img {
+    // border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .cardbox {
+    margin-top: 5px;
+    background: #dff1fd;
+    // color: white;
+    // padding: 0.5rem 0.75rem;
+    // border-radius: 20px;
+    // font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+    // box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    // margin: 0;
+    // white-space: nowrap;
+
+    span {
+      font-size: 0.85rem;
+    }
+  }
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    // gap: 0.75rem;
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.2rem 0;
+    }
+
+    .detailRow {
+      width: 300px;
+      // margin: 0.2rem 0;
+      display: flex;
+      // gap: 0.5rem;
+      // align-items: center;
+
+      strong {
+        min-width: 100px;
+        font-weight: 600;
+      }
+
+      span {
+        font-size: 0.9rem;
+        color: #334155;
+      }
+    }
+
+    .textTruncated {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100px;
+      display: block;
+    }
+    .titleTruncated {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 300px;
+      display: block;
+    }
+
+    .detailsBtn {
+      margin-top: 0.5rem;
+      background: #2a5d9f;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #fff;
+
+      &:hover {
+        background: #1e4a7a;
+      }
+    }
+  }
+}
+
+// Skeleton styles
+.skeleton {
+  .thumb {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.skeletonElement {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonTitle {
+  height: 1.1rem;
+  width: 80%;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonLabel {
+  height: 0.9rem;
+  width: 100px;
+}
+
+.skeletonText {
+  height: 0.9rem;
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
