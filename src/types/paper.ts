@@ -6,7 +6,7 @@ export interface Paper {
   journalaltimpactfactor: string;
   published_at: string;
   doi?: string;
-  journalname?: string;
+  journaldetails?: string;
   pdfLink?: string;
   mediaLinks?: string[];
 }

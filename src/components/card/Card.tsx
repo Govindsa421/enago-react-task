@@ -71,11 +71,14 @@ const Card: FC<CardProps> = ({ paper }) => {
             </span>
           </div>
 
-          {paper.journalname && (
+          {paper.journaldetails && (
             <div className={styles.detailRow}>
               <strong>Journal:</strong>
-              <span className={styles.textTruncated} title={paper.journalname}>
-                {paper.journalname}
+              <span
+                className={styles.textTruncated}
+                title={paper.journaldetails}
+              >
+                {paper.journaldetails}
               </span>
             </div>
           )}
